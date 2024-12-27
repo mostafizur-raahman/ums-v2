@@ -1,18 +1,26 @@
 import { Request, Response } from "express";
 import { studentService } from "./student.service";
+import { StudentValidationSchema } from "./student.validate";
 
 const createStudent = async (req: Request, res: Response) => {
-    const student = req.body;
+    try {
+        const student = req.body;
 
-    console.log(student);
+        const zodParseData = StudentValidationSchema.parse(student);
 
-    const result = await studentService.createStudentIntoDB(student);
+        const result = await studentService.createStudentIntoDB(zodParseData);
 
-    res.status(201).json({
-        success: true,
-        message: "student created succesfully.",
-        data: result,
-    });
+        res.status(201).json({
+            success: true,
+            message: "student created succesfully.",
+            data: result,
+        });
+    } catch (error: any) {
+        res.status(400).json({
+            success: false,
+            message: error.errors[0].message,
+        });
+    }
 };
 
 const getAllStudent = async (req: Request, res: Response) => {

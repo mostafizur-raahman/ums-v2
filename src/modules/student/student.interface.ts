@@ -6,9 +6,9 @@ export type Student = {
         lastName: string;
     };
     email: string;
-    dob: string;
-    contactNo: string;
+    dob?: string;
+    contactNo?: string;
     gender: string;
-    address: string;
+    address?: string;
     isActive: boolean;
 };

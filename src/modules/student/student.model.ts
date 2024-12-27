@@ -5,7 +5,6 @@ const studentSchema = new Schema<Student>(
     {
         id: {
             type: String,
-            required: true,
         },
         name: {
             firstName: String,
@@ -20,7 +19,6 @@ const studentSchema = new Schema<Student>(
         gender: {
             type: String,
             enum: ["male", "female"],
-            required: true,
         },
 
         dob: String,
